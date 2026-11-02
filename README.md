@@ -111,10 +111,10 @@ The project follows a strict 5-step delivery pipeline:
 
 ```mermaid
 flowchart LR
-    S1["Step 1: Final Review of ERP-IND-V1.1\n(7 Executive Decisions)"] --> S2["Step 2: Update Original Documents\n(Charter, PBS, BRD, PRD Scope)"]
-    S2 --> S3["Step 3: Author Complete Final PRD\n(9 Verticals, 4 Apps, Full Specs)"]
-    S3 --> S4["Step 4: System Architecture Document\n(SAD: Backend, Flutter, DB, Security)"]
-    S4 --> S5["Step 5: Development & Sprint Planning\n(DB -> APIs -> UI -> Sprints -> Deploy)"]
+    S1["Step 1: Review ERP-IND-V1.1<br/>7 Executive Decisions"] --> S2["Step 2: Update Documents<br/>Charter, PBS, BRD, PRD Scope"]
+    S2 --> S3["Step 3: Author Final PRD<br/>9 Verticals, 4 Apps, Full Specs"]
+    S3 --> S4["Step 4: Architecture Document<br/>Backend, Flutter, DB, Security"]
+    S4 --> S5["Step 5: Development Planning<br/>DB, APIs, UI, Sprints, Deploy"]
 ```
 
 ### Step 1: Final Review & Approval of Remediation Plan V1.1
