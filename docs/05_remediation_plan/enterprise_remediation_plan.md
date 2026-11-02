@@ -506,7 +506,7 @@ Every state-mutating API endpoint (`POST /orders`, `POST /payments/charge`, `POS
 sequenceDiagram
     autonumber
     actor Client as Customer / Driver App
-    participant Gateway as API Gateway & Redis Cache
+    participant Gateway as API Gateway and Redis Cache
     participant Service as Domain Backend Service
     participant DB as PostgreSQL (Paise Ledger)
 
@@ -519,7 +519,7 @@ sequenceDiagram
         Gateway-->>Client: Return Cached Response (HTTP 200 + Original Body)
     else Key was successfully set (First Time Execution)
         Gateway->>Service: Forward Request Payload
-        Service->>DB: Execute Business Logic & Balanced Ledger Entry (Paise)
+        Service->>DB: Execute Business Logic and Balanced Ledger Entry (Paise)
         DB-->>Service: Transaction Committed
         Service-->>Gateway: HTTP 200 OK (Transaction Details)
         Gateway->>Gateway: Redis SET key Cached_Payload EX 86400 (24 hrs)
