@@ -351,18 +351,18 @@ The platform implements a **Dual-Layered Persistent Idempotency Architecture**:
 
 ```mermaid
 flowchart TD
-    Req["Mutating API Call: POST /payments/charge\nHeader: X-Idempotency-Key: UUIDv4"] --> L1{"Check Redis L1 Cache"}
+    Req["Mutating API Call: POST /payments/charge<br/>Header: X-Idempotency-Key: UUIDv4"] --> L1{"Check Redis L1 Cache"}
     
     L1 -->|Key Exists: Response Cached| ReturnCached["Return Cached Response immediately (Zero DB Load)"]
     L1 -->|Key Missing / Miss| L2_DB["Execute PostgreSQL L2 Persistent Check"]
     
     subgraph PostgreSQL_Safeguard["PostgreSQL Serializable Transaction"]
-        L2_DB --> DB_Insert["INSERT INTO idempotency_records (key, user_id, request_path, request_hash, status, expires_at)\nVALUES ('UUIDv4', 'USR_101', '/payments/charge', 'SHA256', 'IN_PROGRESS', NOW() + 24h)"]
+        L2_DB --> DB_Insert["INSERT INTO idempotency_records (key, user_id, request_path, request_hash, status, expires_at)<br/>VALUES ('UUIDv4', 'USR_101', '/payments/charge', 'SHA256', 'IN_PROGRESS', NOW() + 24h)"]
         
-        DB_Insert -->|Unique Constraint Violation: Concurrent Request| RollbackLock["ROLLBACK -> Return HTTP 409 Conflict ('Transaction in progress, retry in 2s')"]
-        DB_Insert -->|Insert Success: Lock Acquired| ExecuteLedger["Acquire Row-Level Pessimistic Lock (SELECT ... FOR UPDATE)\nExecute Double-Entry Ledger Writes (in Integer Paise)"]
+        DB_Insert -->|Unique Constraint Violation: Concurrent Request| RollbackLock["ROLLBACK: Return HTTP 409 Conflict ('Transaction in progress, retry in 2s')"]
+        DB_Insert -->|Insert Success: Lock Acquired| ExecuteLedger["Acquire Row-Level Pessimistic Lock (SELECT ... FOR UPDATE)<br/>Execute Double-Entry Ledger Writes (in Integer Paise)"]
         
-        ExecuteLedger --> DB_Complete["UPDATE idempotency_records SET status = 'COMPLETED', response_body = '...'\nCOMMIT TRANSACTION"]
+        ExecuteLedger --> DB_Complete["UPDATE idempotency_records SET status = 'COMPLETED', response_body = '...'<br/>COMMIT TRANSACTION"]
     end
     
     DB_Complete --> CacheL1["Write Response Payload to Redis L1 (24h TTL)"]

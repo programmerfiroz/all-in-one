@@ -258,7 +258,7 @@ flowchart TD
     Pay --> SellerLabel["Seller Prints Shipping Label & AWB"]
     SellerLabel --> Carrier3PL["3PL Logistics Aggregator Pickup"]
     Carrier3PL --> Delivery["Doorstep Delivery with Return Window"]
-    Delivery --> Escrow["7-Day Return Expiry -> Seller Payout"]
+    Delivery --> Escrow["7-Day Return Expiry to Seller Payout"]
 ```
 
 * **BR-ECOM-01 Multi-Seller Storefront & SKU Matrix:** Support for independent merchants managing multidimensional SKUs (Size, Color, Material, Brand, Warranty).
