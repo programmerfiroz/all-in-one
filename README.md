@@ -57,9 +57,11 @@ docs/
 │   └── business_requirements_document.md   # Business Requirements Document (BRD-IND-V1.0)
 ├── 04_product_requirements_document/
 │   └── prd_scope_and_outline.md            # PRD Scope & Structure Blueprint (PRD-SCOPE-IND-V1.0)
-└── 05_remediation_plan/
-    ├── enterprise_remediation_plan.md      # Remediation Plan Revision 1 (ERP-IND-V1.0 - Superseded)
-    └── enterprise_remediation_plan_v1.1.md # Remediation Plan Revision 2 (ERP-IND-V1.1 - Authoritative)
+├── 05_remediation_plan/
+│   ├── enterprise_remediation_plan.md      # Remediation Plan Revision 1 (ERP-IND-V1.0 - Superseded)
+│   └── enterprise_remediation_plan_v1.1.md # Remediation Plan Revision 2 (ERP-IND-V1.1 - Authoritative)
+└── 06_visual_hierarchy_and_flows/
+    └── high_level_visual_hierarchy.md      # Master Visual Hierarchy & System Flow Blueprint (VHB-IND-V1.0)
 ```
 
 ### Detailed Document Breakdown:
@@ -95,6 +97,16 @@ docs/
   6. **WebSocket Decorrelated Jitter:** Implemented RFC-standard full jitter backoff with HTTP/2 delta-sync fallback; realistic gateway capacity parameters.
   7. **Durable Redis Concurrency:** Added Martin Kleppmann Monotonic Fencing Tokens, durable PostgreSQL outbox persistence, and BullMQ dead-letter recovery workers.
   8. **Persistent Database Idempotency:** Added a PostgreSQL `idempotency_records` table with engine-level unique constraints and row-level pessimistic locking (`SELECT ... FOR UPDATE`) in 64-bit integer Paise.
+
+### 7. High-Level Visual Hierarchy & System Flow Blueprint (Version 1.0)
+* **Path:** [`docs/06_visual_hierarchy_and_flows/high_level_visual_hierarchy.md`](file:///Users/firozmohammad/DigiEmperor/all_in_one/docs/06_visual_hierarchy_and_flows/high_level_visual_hierarchy.md)
+* **Purpose:** Complete visual architectural blueprint featuring GitHub-native Mermaid diagrams for:
+  1. Macro System Topology (Apps -> Edge Gateway -> Core Engines -> 9 Verticals -> Data Tier -> Indian Integrations).
+  2. Component Breakdown across all 4 applications (including single Unified Workforce App with Transit vs. Specialist dynamic shells).
+  3. Clean Architecture & BLoC reactive event-state data flows (offline-first read pattern vs. mutating transaction pattern).
+  4. End-to-end operational workflows for all 9 business verticals (Food, Grocery, E-commerce, Rides, Logistics, Home Services, Healthcare, Education, Hotels).
+  5. Double-entry financial treasury flow (Paise precision, Sec 9(5) vs. Sec 52 dual-invoicing, GSTR-8, T+1 settlements).
+  6. High-scale concurrency, 4-tier GPS anti-spoofing, and persistent database idempotency lifecycles.
 
 ---
 
