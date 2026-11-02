@@ -133,7 +133,7 @@ sequenceDiagram
     User->>Bloc: User taps action (dispatches FeatureEvent)
     Note over Bloc: BLoC emits FeatureLoadingState
     Bloc->>UseCase: Invokes execute(params)
-    UseCase->>UseCase: Validate business rules & constraints
+    UseCase->>UseCase: Validate business rules and constraints
     UseCase->>Repo: Calls repository interface method
     
     alt Offline-First Read Pattern
@@ -184,14 +184,14 @@ sequenceDiagram
     Back->>Rider: Push 30s Task Offer Modal
     Rider->>Back: Rider Accepts Offer
     
-    Rider->>Rest: Arrives at Restaurant; verifies Order ID & Hot-Bag
+    Rider->>Rest: Arrives at Restaurant and verifies Order ID and Hot-Bag
     Rest->>Rider: Handover food package with tamper-evident seal
     Rider->>Cust: In transit to delivery address (Real-time telemetry)
     
-    Rider->>Cust: Arrives at doorstep; requests Delivery OTP
+    Rider->>Cust: Arrives at doorstep and requests Delivery OTP
     Cust->>Rider: Customer shares 4-digit OTP
     Rider->>Back: Submit OTP verification
-    Back->>Back: Order marked DELIVERED; Release restaurant & rider credits
+    Back->>Back: Order marked DELIVERED and release restaurant and rider credits
 ```
 
 ---
@@ -204,8 +204,8 @@ sequenceDiagram
     participant Back as Mobility Backend
     actor Driver as Workforce App (Ride Mode)
 
-    Rider->>Back: Select Destination; Request Fare Quote
-    Back->>Rider: Display Guaranteed Upfront Fare (Tolls & Surge included)
+    Rider->>Back: Select Destination and Request Fare Quote
+    Back->>Rider: Display Guaranteed Upfront Fare (Tolls and Surge included)
     Rider->>Back: Confirm Booking (Issue 4-Digit Start OTP)
     
     Back->>Driver: Geo-spatial Broadcast to nearest available drivers
@@ -213,15 +213,15 @@ sequenceDiagram
     Back->>Rider: Share Driver Details (Vehicle Number, Live Bearing, ETA)
     
     Driver->>Rider: Arrives at Pickup Coordinates
-    Rider->>Driver: Board vehicle; share 4-Digit Start OTP
+    Rider->>Driver: Board vehicle and share 4-Digit Start OTP
     Driver->>Back: Validate Start OTP via App Keypad
     Back->>Back: Transition state to TRIP_IN_TRANSIT
     
     Note over Driver,Rider: Live route monitoring with automated route deviation anomaly detection
     
-    Driver->>Back: Arrive at Drop Location; tap End Trip
-    Back->>Back: Calculate FASTag automated toll charges; auto-debit UPI / Wallet
-    Back-->>Rider: Display Receipt; prompt for Driver Rating & Tip
+    Driver->>Back: Arrive at Drop Location and tap End Trip
+    Back->>Back: Calculate FASTag automated toll charges and auto-debit UPI or Wallet
+    Back-->>Rider: Display Receipt and prompt for Driver Rating and Tip
     Back-->>Driver: Credit Trip Earnings to Driver Payout Ledger
 ```
 
@@ -231,10 +231,10 @@ sequenceDiagram
 ```mermaid
 flowchart TD
     Browse["Customer adds items from Seller A and Seller B to Universal Cart"] --> Checkout["Unified Payment via UPI / Card"]
-    Checkout --> Split["Backend splits Master Order into Sub-Orders: Order_A & Order_B"]
+    Checkout --> Split["Backend splits Master Order into Sub-Orders: Order_A and Order_B"]
     
-    Split --> PackA["Seller A packs item; prints automated Waybill & Manifest"]
-    Split --> PackB["Seller B packs item; prints automated Waybill & Manifest"]
+    Split --> PackA["Seller A packs item and prints automated Waybill and Manifest"]
+    Split --> PackB["Seller B packs item and prints automated Waybill and Manifest"]
     
     PackA --> Pickup3PL_A["3PL Courier (Delhivery) picks up package from Seller A"]
     PackB --> Pickup3PL_B["3PL Courier (Shiprocket) picks up package from Seller B"]
@@ -261,7 +261,7 @@ flowchart TD
     SlotSelect --> TechAssign["Specialist Engine dispatches Verified, Background-Checked Technician"]
     
     TechAssign --> TechArrival["Technician arrives in uniform with digital toolkit"]
-    TechArrival --> Inspection["Inspects equipment; identifies required spare parts"]
+    TechArrival --> Inspection["Inspects equipment and identifies required spare parts"]
     
     Inspection --> ExtraQuoteCheck{"Are Extra Spare Parts Required?"}
     
@@ -271,8 +271,8 @@ flowchart TD
     DigitalQuote --> PushPrompt["Customer App receives instant push modal with price breakdown"]
     PushPrompt --> CustApproval{"Customer Digital Decision"}
     
-    CustApproval -->|Rejected| AbortExtra["Extra parts cancelled; standard inspection fee applies"]
-    CustApproval -->|Approved| ResumeWork["Customer digitally approves; Technician proceeds with replacement"]
+    CustApproval -->|Rejected| AbortExtra["Extra parts cancelled and standard inspection fee applies"]
+    CustApproval -->|Approved| ResumeWork["Customer digitally approves and Technician proceeds with replacement"]
     
     StandardWork --> PhotoQC["Technician captures mandatory Before and After photos"]
     ResumeWork --> PhotoQC
@@ -294,10 +294,10 @@ sequenceDiagram
     actor Phleb as Phlebotomist (Workforce App)
 
     alt Video Teleconsultation Channel
-        Patient->>Back: Search Doctor by Specialty; Select Teleconsult Slot
-        Back->>ABDM: Verify Patient ABHA ID & Doctor Medical Council ID
+        Patient->>Back: Search Doctor by Specialty and Select Teleconsult Slot
+        Back->>ABDM: Verify Patient ABHA ID and Doctor Medical Council ID
         Patient->>Doctor: Join Encrypted WebRTC Video Consultation Room
-        Doctor->>Doctor: Review symptoms; prescribe permissible List O / List A drugs
+        Doctor->>Doctor: Review symptoms and prescribe permissible List O and List A drugs
         Doctor->>Back: Submit cryptographically signed digital prescription
         Back->>Patient: Save Signed PDF in Patient's Encrypted Health Locker
         
@@ -309,7 +309,7 @@ sequenceDiagram
     else Home Diagnostic Sample Collection Channel
         Patient->>Back: Book Full Body Blood Checkup (Select fasting morning slot)
         Back->>Phleb: Assign certified phlebotomist with temperature-controlled cold carrier
-        Phleb->>Patient: Arrive at home; draw blood samples; scan unique barcoded vacutainer tubes
+        Phleb->>Patient: Arrive at home, draw blood samples, and scan barcoded vacutainer tubes
         Phleb->>Back: Hand over samples to accredited partner diagnostic lab
         Back->>Patient: Encrypted Diagnostic Report PDF delivered to Health Locker within 24 hours
     end
@@ -324,19 +324,19 @@ flowchart TD
     BookDemo --> AttendDemo["Student attends interactive WebRTC live demo classroom"]
     
     AttendDemo --> Satisfied{"Proceed with Enrollment?"}
-    Satisfied -->|No| Feedback["Collect feedback; recommend alternative tutors"]
+    Satisfied -->|No| Feedback["Collect feedback and recommend alternative tutors"]
     
     Satisfied -->|Yes| PlanChoice["Select Payment Schedule: Full Term Upfront vs. Monthly Installments"]
     
     PlanChoice -->|Monthly Installments| Mandate["Parent sets up recurring UPI Autopay / e-NACH mandate"]
     PlanChoice -->|Full Payment| UpfrontPay["One-time payment via UPI / NetBanking"]
     
-    Mandate --> Enrolled["Student added to active batch roster, digital timetable & notes library"]
+    Mandate --> Enrolled["Student added to active batch roster, digital timetable and notes library"]
     UpfrontPay --> Enrolled
     
-    Enrolled --> DailyClass["Student joins live scheduled lectures; submits digital homework"]
-    DailyClass --> AttendanceAlert["Teacher marks attendance; automated SMS sent to parents if absent"]
-    DailyClass --> ProgressReports["Quarterly mock test assessments & digital report cards published"]
+    Enrolled --> DailyClass["Student joins live scheduled lectures and submits digital homework"]
+    DailyClass --> AttendanceAlert["Teacher marks attendance and automated SMS sent to parents if absent"]
+    DailyClass --> ProgressReports["Quarterly mock test assessments and digital report cards published"]
 ```
 
 ---
@@ -349,9 +349,9 @@ flowchart TD
     
     HoldLock --> Prepay{"Payment Selection"}
     Prepay -->|Prepaid Online| OnlinePay["Settle room tariff via UPI / Card"]
-    Prepay -->|Pay at Hotel| VerifyCard["Verify customer trust score; guarantee reservation"]
+    Prepay -->|Pay at Hotel| VerifyCard["Verify customer trust score and guarantee reservation"]
     
-    OnlinePay --> BookingOK["Booking Confirmed; Instant PDF Voucher generated"]
+    OnlinePay --> BookingOK["Booking Confirmed and Instant PDF Voucher generated"]
     VerifyCard --> BookingOK
     
     BookingOK --> KycCheck{"Is Guest an Indian Domestic Citizen?"}
@@ -363,8 +363,8 @@ flowchart TD
     ForeignFormC --> TransmitBoI["Hotelier Extranet transmits Form C data to BoI FRRO portal within 24 hours"]
     TransmitBoI --> ReceptionArrival
     
-    ReceptionArrival --> CheckInQR["Front desk scans digital voucher QR code; hands over room keycard"]
-    CheckInQR --> StayComplete["Guest completes stay; folio settled upon check-out"]
+    ReceptionArrival --> CheckInQR["Front desk scans digital voucher QR code and hands over room keycard"]
+    CheckInQR --> StayComplete["Guest completes stay and folio settled upon check-out"]
 ```
 
 ---
@@ -420,7 +420,7 @@ sequenceDiagram
     Driver->>Sec: Captures GPS telemetry packet (Lat, Lng, Bearing)
     Sec->>Sec: Verify location.isMock() == false
     Sec->>Sec: Verify Play Integrity token (bootloader locked, no Magisk/Frida)
-    Sec->>Sec: Validate GNSS Doppler variance & kinematic speed <= 120 km/h
+    Sec->>Sec: Validate GNSS Doppler variance and kinematic speed under 120 km/h
     Sec->>Dispatch: Forward verified coordinate packet
     
     Note over Dispatch,Redis: Dispatcher targets dual-mode driver for new assignment
@@ -470,3 +470,4 @@ This visual hierarchy blueprint coordinates directly with the complete project d
 * **Document Identifier:** VHB-IND-V1.0
 * **Syntax Validation:** All Mermaid diagrams utilize GitHub-native compatible syntax (clean labels, `<br/>` line breaks, zero unescaped arrows).
 * **Next Action:** Awaiting executive approval on Remediation Decisions `DEC-01` through `DEC-07` to begin foundational document updates and Final PRD authoring.
+
